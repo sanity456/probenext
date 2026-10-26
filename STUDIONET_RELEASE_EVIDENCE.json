@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "project": "ProbeNext",
+  "repository": "https://github.com/sanity456/probenext",
+  "network": {
+    "name": "GenLayer StudioNet",
+    "rpc": "https://studio.genlayer.com/api"
+  },
+  "deployer": "0x07f42a7465e613756c6d97889fe11bfde71a819d",
+  "source": {
+    "contractPath": "contracts/probe_next.py",
+    "deployedCommit": "cd9ee9af0ed33f8a8d437607426fa81b89f0756b",
+    "sha256": "713845e5d9d44872c6b576c4794829c1e80c112086b449150c49086961a0318f",
+    "liveSourceByteIdentical": true,
+    "runner": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6"
+  },
+  "toolchain": {
+    "genlayerCli": "0.39.2",
+    "genlayerJs": "1.1.8"
+  },
+  "deployment": {
+    "contractAddress": "0xa8Ed75F155aEDD08296cE33478Ba344E785FCA5a",
+    "transaction": "0x8b8b2835c2c42c0dc49e96051a3b30595077081275e5994504f19c871d651440",
+    "status": "FINALIZED",
+    "leaderExecution": "SUCCESS",
+    "consensus": "MAJORITY_AGREE",
+    "votes": { "agree": 5, "idle": 0, "disagree": 0 }
+  },
+  "transactions": [
+    {
+      "hash": "0x684b7168cdcdc25cf66229d0ac25cd890d55699db756d7de94cef06b14616b73",
+      "action": "open_case(pump-1)",
+      "status": "FINALIZED",
+      "leaderExecution": "SUCCESS",
+      "votes": { "agree": 5, "idle": 0, "disagree": 0 }
+    },
+    {
+      "hash": "0x8ad8edd5906d746028192ac5151f93101a471acc0ca976604ada122ce40037f0",
+      "action": "record_result(pump-1, screen, positive observation)",
+      "status": "FINALIZED",
+      "leaderExecution": "SUCCESS",
+      "votes": { "agree": 3, "idle": 2, "disagree": 0 },
+      "expectedState": { "remainingCauses": ["filter", "seal"], "currentProbe": "intake", "state": "ACTIVE" }
+    },
+    {
+      "hash": "0x4dd28b4307c03bf9069f698ec00bb030f7ae675d18074c3c6789d9eeb4c327bc",
+      "action": "replay completed screen probe",
+      "status": "FINALIZED",
+      "leaderExecution": "ERROR",
+      "expectedGuard": "[EXPECTED] probe_not_current",
+      "votes": { "agree": 5, "idle": 0, "disagree": 0 },
+      "stateEffect": "rolled back; the current probe remained intake"
+    },
+    {
+      "hash": "0x513b900e0e8f1e214b62cd2066384337e3577ebb15ba60ef50abcbe358c9e75b",
+      "action": "record_result(pump-1, intake, positive observation)",
+      "status": "FINALIZED",
+      "leaderExecution": "SUCCESS",
+      "votes": { "agree": 3, "idle": 2, "disagree": 0 },
+      "expectedState": { "remainingCauses": ["filter"], "currentProbe": "", "state": "ONE_HYPOTHESIS_REMAINS" }
+    },
+    {
+      "hash": "0x7043fb1f8aabd745855cceff55108c97ba3dd1d596f5473389b2786dc5654d57",
+      "action": "discarded CLI harness attempt to pass JSON-string parameters",
+      "status": "FINALIZED",
+      "leaderExecution": "ERROR",
+      "expectedGuard": "[EXPECTED] invalid_causes_json",
+      "note": "The CLI parsed JSON array text as an array instead of a string; retried with genlayer-js using the declared string parameters. No case state was created."
+    },
+    {
+      "hash": "0x9c5302e648029997e0c11f1225b9db7a1dee0c2f5287510abf83fcc4befbc8dd",
+      "action": "discarded CLI harness attempt to pass JSON-string parameters",
+      "status": "FINALIZED",
+      "leaderExecution": "ERROR",
+      "expectedGuard": "[EXPECTED] invalid_causes",
+      "note": "The CLI parsed JSON array text as an array instead of a string; retried with genlayer-js using the declared string parameters. No case state was created."
+    }
+  ],
+  "evidence": {
+    "finalReadback": {
+      "state": "ONE_HYPOTHESIS_REMAINS",
+      "remainingCauses": ["filter"],
+      "usedProbes": ["screen", "intake"],
+      "historyOutcomes": ["POSITIVE", "POSITIVE"]
+    }
+  }
+}

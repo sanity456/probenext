@@ -16,6 +16,10 @@ View: `get_case`
 
 One deployment supports multiple owner-scoped cases. See `ARCHITECTURE.md`, `ORIGINALITY.md`, and `SECURITY.md` for comparisons and limits.
 
+## StudioNet evidence
+
+Deployed at `0xa8Ed75F155aEDD08296cE33478Ba344E785FCA5a`. The released source is pinned to commit `cd9ee9af0ed33f8a8d437607426fa81b89f0756b`; the deployment and live test transaction receipts, expected guard rejection, state readback, and source hash are recorded in [`STUDIONET_RELEASE_EVIDENCE.json`](STUDIONET_RELEASE_EVIDENCE.json).
+
 ## Local checks
 
 ```text
